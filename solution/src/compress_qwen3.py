@@ -1,9 +1,14 @@
 """Compress Qwen3-30B-A3B to K experts per layer by router usage.
 
-The base checkpoint stores each expert as separate gate/up/down weights. We
-keep the top-K experts per layer (by task router usage), rename them to
-experts 0..K-1, slice the router rows, and copy every non-expert tensor.
-Every kept weight is an exact copy of a base weight; this is pure surgery.
+This writes the model's native 3D expert format:
+
+  model.layers.i.mlp.experts.gate_up_proj  [K, 2*intermediate, hidden]
+  model.layers.i.mlp.experts.down_proj     [K, hidden, intermediate]
+
+The base HF checkpoint stores per-expert gate/up/down keys. We select the
+top-K experts per layer, concatenate gate+up, stack the experts, slice the
+router rows, and copy every non-expert tensor. All kept weights are exact
+copies of base weights.
 """
 
 from __future__ import annotations
@@ -14,6 +19,7 @@ import re
 import shutil
 from pathlib import Path
 
+import torch
 from safetensors import safe_open
 from safetensors.torch import save_file
 
@@ -47,7 +53,12 @@ def main() -> None:
     for layer in range(min(3, num_layers)):
         print(f"  layer {layer}: {keep[layer]}", flush=True)
 
-    out: dict[str, object] = {}
+    # Per-layer selected expert tensors, keyed by new expert index.
+    selected: dict[int, dict[int, dict[str, torch.Tensor]]] = {
+        layer: {new: {} for new in range(args.k)} for layer in range(num_layers)
+    }
+    out: dict[str, torch.Tensor] = {}
+
     shard_names = sorted(set(weight_map.values()))
     for shard_name in shard_names:
         with safe_open(str(args.base_dir / shard_name), framework="pt", device="cpu") as f:
@@ -60,14 +71,24 @@ def main() -> None:
                     if orig_expert not in keep[layer]:
                         continue
                     new_expert = keep[layer].index(orig_expert)
-                    new_key = f"model.layers.{layer}.mlp.experts.{new_expert}.{proj}.weight"
-                    out[new_key] = f.get_tensor(key).clone()
+                    selected[layer][new_expert][proj] = f.get_tensor(key).clone()
                 elif key.endswith(".mlp.gate.weight"):
                     layer = int(key.split(".")[2])
                     out[key] = f.get_tensor(key)[keep[layer]].clone()
                 else:
                     out[key] = f.get_tensor(key).clone()
         print(f"  processed {shard_name}", flush=True)
+
+    for layer in range(num_layers):
+        gate_up = []
+        down = []
+        for new_expert in range(args.k):
+            parts = selected[layer][new_expert]
+            gate_up.append(torch.cat([parts["gate_proj"], parts["up_proj"]], dim=0))
+            down.append(parts["down_proj"])
+        out[f"model.layers.{layer}.mlp.experts.gate_up_proj"] = torch.stack(gate_up)
+        out[f"model.layers.{layer}.mlp.experts.down_proj"] = torch.stack(down)
+        selected[layer] = {}
 
     save_file(out, str(args.out_dir / "model.safetensors"))
     for name in ("config.json", "generation_config.json", "tokenizer.json", "tokenizer_config.json", "special_tokens_map.json", "merges.txt", "vocab.json"):
@@ -78,19 +99,20 @@ def main() -> None:
     config["num_experts_per_tok"] = min(args.k, config.get("num_experts_per_tok", args.k))
     (args.out_dir / "config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
 
-    # Logical parameter / byte accounting.
     out_params = sum(t.numel() for t in out.values())
+    base_bytes = 61079824827
+    compressed_bytes = (args.out_dir / "model.safetensors").stat().st_size
     report = {
         "k": args.k,
         "base_params_expected": 30532122624,
         "compressed_params": out_params,
         "param_ratio": out_params / 30532122624,
-        "base_bytes": 61079824827,
-        "compressed_bytes": (args.out_dir / "model.safetensors").stat().st_size,
-        "byte_ratio": (args.out_dir / "model.safetensors").stat().st_size / 61079824827,
+        "base_bytes": base_bytes,
+        "compressed_bytes": compressed_bytes,
+        "byte_ratio": compressed_bytes / base_bytes,
         "keep": keep,
+        "expert_format": "3d_gate_up_down",
     }
-    report["byte_ratio"] = (args.out_dir / "model.safetensors").stat().st_size / report["base_bytes"]
     (args.out_dir / "compression_report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2), flush=True)
 

@@ -340,8 +340,8 @@ def inspect_mxfp4_roundtrip() -> None:
 
 
 @app.function(image=image, volumes={"/vol": volume}, timeout=600, cpu=2, memory=4096)
-def make_combined_memory_remote() -> None:
-    _run([sys.executable, "/src/make_combined_memory.py", "--banking-dir", "/vol/data/banking77"])
+def make_combined_memory_remote(banking_dir: str = "/vol/data/banking77") -> None:
+    _run([sys.executable, "/src/make_combined_memory.py", "--banking-dir", banking_dir])
     volume.commit()
 
 
@@ -522,6 +522,147 @@ def compressed_qwen3_banking_dev_remote(
         "--max-new-tokens", "24",
         "--max-length", "3072",
     ])
+    volume.commit()
+
+
+@app.function(
+    image=image,
+    volumes={"/vol": volume},
+    gpu="A10",
+    timeout=14400,
+    cpu=8,
+    memory=32768,
+)
+def growth_qwen3_remote(
+    model_tag: str = "k7-banking10",
+    data_dir: str = "/vol/data/banking77_10class",
+    old_dev_limit: int = 300,
+) -> None:
+    model_path = f"/vol/models/compressed-qwen3-{model_tag}"
+    out = f"/vol/results/qwen3/{model_tag}/growth"
+    common = [
+        sys.executable, "/src/eval_classification.py",
+        "--model-path", model_path,
+        "--name", f"compressed-qwen3-{model_tag}",
+        "--eager-experts",
+        "--meta", f"{data_dir}/meta.json",
+    ]
+    _run(common + [
+        "--memory", f"{data_dir}/old_memory.jsonl",
+        "--rows", f"{data_dir}/locked/new_test.jsonl",
+        "--labels", "old",
+        "--out-dir", f"{out}/new_before",
+        "--top-k", "8",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+        "--final-eval",
+    ])
+    _run(common + [
+        "--memory", f"{data_dir}/combined_memory.jsonl",
+        "--rows", f"{data_dir}/locked/new_test.jsonl",
+        "--labels", "all",
+        "--out-dir", f"{out}/new_after",
+        "--top-k", "8",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+        "--final-eval",
+    ])
+    _run(common + [
+        "--memory", f"{data_dir}/old_memory.jsonl",
+        "--rows", f"{data_dir}/old_dev.jsonl",
+        "--labels", "old",
+        "--out-dir", f"{out}/old_before",
+        "--limit", str(old_dev_limit),
+        "--top-k", "8",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+    ])
+    _run(common + [
+        "--memory", f"{data_dir}/combined_memory.jsonl",
+        "--rows", f"{data_dir}/old_dev.jsonl",
+        "--labels", "old",
+        "--out-dir", f"{out}/old_after",
+        "--limit", str(old_dev_limit),
+        "--top-k", "8",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+    ])
+    volume.commit()
+
+
+@app.function(
+    image=image,
+    volumes={"/vol": volume},
+    gpu="A100-80GB",
+    timeout=10800,
+    cpu=8,
+    memory=131072,
+)
+def final_10_base_remote(limit: int = 1000) -> None:
+    _run([
+        sys.executable, "/src/eval_banking.py",
+        "--model-path", "/vol/models/qwen3-30b",
+        "--name", "base-qwen3-10-final",
+        "--split", "exam",
+        "--final-eval",
+        "--data-dir", "/vol/data/banking77_10class",
+        "--out-dir", "/vol/results/final/base-qwen3-10/banking",
+        "--limit", str(limit),
+        "--top-k", "8",
+        "--batch-size", "1",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+    ])
+    volume.commit()
+
+
+@app.function(
+    image=image,
+    volumes={"/vol": volume},
+    gpu="A10",
+    timeout=10800,
+    cpu=8,
+    memory=32768,
+)
+def final_10_compressed_remote(model_tag: str = "k7-banking10", limit: int = 1000) -> None:
+    _run([
+        sys.executable, "/src/eval_banking.py",
+        "--model-path", f"/vol/models/compressed-qwen3-{model_tag}",
+        "--name", f"compressed-qwen3-{model_tag}",
+        "--eager-experts",
+        "--split", "exam",
+        "--final-eval",
+        "--data-dir", "/vol/data/banking77_10class",
+        "--out-dir", f"/vol/results/final/compressed-qwen3-{model_tag}/banking",
+        "--limit", str(limit),
+        "--top-k", "8",
+        "--batch-size", "1",
+        "--max-new-tokens", "24",
+        "--max-length", "3072",
+    ])
+    volume.commit()
+
+
+@app.function(image=image, volumes={"/vol": volume}, timeout=1800, cpu=2, memory=4096)
+def hash_qwen3_models_remote(model_tag: str = "k7-banking10") -> None:
+    import hashlib
+
+    out = Path(f"/vol/results/qwen3/{model_tag}/hashes.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    paths = {
+        "model": Path(f"/vol/models/compressed-qwen3-{model_tag}/model.safetensors"),
+        "old_memory": Path("/vol/data/banking77_10class/old_memory.jsonl"),
+        "combined_memory": Path("/vol/data/banking77_10class/combined_memory.jsonl"),
+    }
+    result = {}
+    for name, path in paths.items():
+        h = hashlib.sha256()
+        with path.open("rb") as f:
+            for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                h.update(chunk)
+        result[name] = {"path": str(path), "sha256": h.hexdigest(), "bytes": path.stat().st_size}
+    out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result, indent=2), flush=True)
     volume.commit()
 
 

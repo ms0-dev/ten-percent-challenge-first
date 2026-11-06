@@ -53,6 +53,7 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--max-new-tokens", type=int, default=24)
     parser.add_argument("--max-length", type=int, default=3072)
+    parser.add_argument("--eager-experts", action="store_true")
     parser.add_argument("--final-eval", action="store_true")
     args = parser.parse_args()
 
@@ -65,7 +66,7 @@ def main() -> None:
     valid_labels = [x["label_name"] for x in labels]
     index = BM25Index([x["text"] for x in memory])
 
-    model, tokenizer = load_model(args.model_path)
+    model, tokenizer = load_model(args.model_path, eager_experts=args.eager_experts)
     prompts: list[str] = []
     for row in rows:
         hits = index.search(row["text"], k=args.top_k)

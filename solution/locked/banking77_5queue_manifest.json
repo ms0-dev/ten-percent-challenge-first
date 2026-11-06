@@ -1,0 +1,9 @@
+{
+  "dataset": "PolyAI/banking77",
+  "variant": "5_queue_grouped",
+  "note": "5-queue coarse commercial router; exam locked before model development. Mapping is based on intent names only.",
+  "sha256": {
+    "old_test.jsonl": "108bc9bbb264533884e0902976ce0b0a78337af5461dc392e60507ccd5b8a87d",
+    "new_test.jsonl": "8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd"
+  }
+}

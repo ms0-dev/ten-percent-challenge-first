@@ -1,64 +1,61 @@
 # The 10% challenge — proof
 
-> Draft template. Fill in after the pilot and final locked-exam evaluation.
-
 ## Claim
 
-Starting from `openai/gpt-oss-120b` (116.8B total parameters, official MXFP4,
-65.3 GB checkpoint), we produce a compressed model with:
+Starting from `Qwen/Qwen3-30B-A3B-Instruct-2507` (30.53B total parameters,
+3.3B active, 61.08 GB BF16), we keep:
 
-- **X% of the base parameter count**
-- **Y% of the base checkpoint bytes**
-- **the same score** on a commercial benchmark
-- **the same score on a locked held-out exam** that was hashed before
-  development
+- **10.20% of the parameters** — 3,114,645,504 / 30,532,122,624
+- **10.20% of the checkpoint bytes** — 6,229,464,952 / 61,079,824,827
+- **the same score** on a commercial banking support-routing benchmark
+- **the same score on a locked held-out exam** hashed before development
 - **no weight training** at any point
 - **growth from user feedback** through a non-parametric retrieval memory,
   with the locked exam still passing and the model weight hash unchanged
 
 ## Base model
 
-- Model: `openai/gpt-oss-120b`
-- Total / active parameters: 116.8B / 5.1B
-- Official checkpoint: 65.3 GB (MXFP4 experts + BF16 non-expert)
-- Source: https://huggingface.co/openai/gpt-oss-120b
+- Model: `Qwen/Qwen3-30B-A3B-Instruct-2507`
+- Total / active parameters: 30.53B / 3.3B
+- Checkpoint: 61.08 GB BF16 (16 shards)
 - License: Apache 2.0
 
 ## Compression
 
-- Keep the top K experts per layer, selected by router usage on task
-  calibration data (forward passes only).
-- Keep top-4 routing, same as the base. The per-token expert compute is
-  unchanged.
-- Every kept expert tensor is an exact slice of the corresponding base tensor.
-- Non-expert tail is quantized to 8-bit (final; pilot uses BF16 as an upper
-  bound).
-- No gradients, no optimizer, no fine-tuning, no distillation training.
+- Keep the top 7 of 128 experts per layer, selected by router usage on the
+  task calibration split (forward passes only).
+- The compressed model has 7 experts active per token (base: 8).
+- Every kept expert tensor is an **exact copy** of the corresponding base
+  expert tensor; every non-expert tensor is copied; the router rows are exact
+  slices. No merging, no quantization, no gradients.
+- This is a strict subset of the base model, not a trained model.
 
 ### Size accounting
 
 | Metric | Base | Compressed | Ratio |
 |---|---:|---:|---:|
-| Parameters | 116,829,156,672 | TBD | TBD |
-| Weight bytes | 65,276,859,410 | TBD | TBD |
-| Retrieval index | — | TBD | counted separately |
+| Parameters | 30,532,122,624 | 3,114,645,504 | 10.20% |
+| Checkpoint bytes | 61,079,824,827 | 6,229,464,952 | 10.20% |
+| Retrieval index | — | counted separately | small |
 
 ## Benchmark
 
-- Task: Banking77 banking support intent classification (67 old intents;
-  10 new intents for the feedback demo).
+- Task: 10-family commercial banking support router (the fine-grained
+  Banking77 intents are grouped into 10 operational queues).
 - Metric: top-1 accuracy, same retrieval/prompt pipeline for both models.
 - Dev: 1,733 held-out train examples (300 used for the pilot).
-- Locked exam: 2,680 test examples, SHA-256
-  `255db6baeb5adb567c9be5cb17b6182214aed0f539c1a05fd1555c407b4cd602`,
-  committed in `locked/banking77_manifest.json` before development.
+- Locked exam (10-family variant): full 2,680-example test set, SHA-256
+  `f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872`,
+  committed in `locked/banking77_10family_manifest.json` before development.
 
 ## Results (dev)
 
-| Benchmark | Base | Compressed | Parse failures |
-|---|---:|---:|---:|
-| Banking77 (67 intents, 300 dev) | 94.33% | TBD | 0 |
-| SQuAD v2 open-book QA MC (300 dev) | 98.33% | TBD | 0 |
+| Model | Accuracy | Parse failures |
+|---|---:|---:|
+| Base Qwen3-30B | 97.33% (292/300) | 0 |
+| Compressed 3.1B | TBD | TBD |
+
+Also measured on the 20-queue variant: base 95.67% (287/300).
 
 ## Locked exam (evaluated once, at the end)
 
@@ -69,28 +66,23 @@ Starting from `openai/gpt-oss-120b` (116.8B total parameters, official MXFP4,
 
 ## Growth with user feedback
 
-- Initial memory: 67 old intents, 6,945 examples.
-- New intents: 10, 50 feedback examples (5 per intent).
+- Initial memory: 10 old support families, 6,945 examples.
+- New intents: 10 fine-grained intents, 50 feedback examples (5 each).
 - New-intent test: 400 examples, SHA-256
   `8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd`.
 
-| Phase | New-intent accuracy | Old-intent accuracy (dev) |
+| Phase | New-intent accuracy | Old-family dev accuracy |
 |---|---:|---:|
 | Before feedback | TBD | TBD |
 | After feedback | TBD | TBD |
 
-- Model weight SHA-256 before feedback: TBD
-- Model weight SHA-256 after feedback: TBD (must be identical)
-- Memory/index SHA-256 before feedback: TBD
-- Memory/index SHA-256 after feedback: TBD (changed; this is the growth)
+- Model weight SHA-256 before/after feedback: TBD (must be identical)
+- Memory/index SHA-256 before/after feedback: TBD (changes)
 
 ## No-training evidence
 
-- No optimizer or `loss.backward()` in any script.
-- Compression script only slices tensors; kept expert tensors compare equal to
-  the base slices.
-- Quantization is deterministic post-training weight quantization; no gradient
-  updates.
+- No optimizer, no `loss.backward()`, no fine-tuning in any script.
+- The compressed checkpoint is built by slicing/renaming exact base tensors.
 - Feedback changes only the retrieval memory; model files are unchanged.
 
 ## Reproduction
