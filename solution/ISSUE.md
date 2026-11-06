@@ -64,8 +64,9 @@ SHA-256
 `8e2a8288e94c50542c2c40268ac6d8267c7746d3a58dcdbb8dd1926682610d44`
 (see `evidence/locked_exam_1000_manifest.json`). Both models use the same
 BM25 top-8 retrieval examples, the same prompt, the same tokenizer, greedy
-decoding, and the same label parser. The exam was read once for each model
-after the compressed artifact was frozen.
+decoding, and the same label parser. The exam was read only for final
+evaluation (base, pre-growth, and edited models); it was never used for
+tuning.
 
 ## Compression
 
