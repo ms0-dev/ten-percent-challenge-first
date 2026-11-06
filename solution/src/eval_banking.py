@@ -33,9 +33,14 @@ def main() -> None:
     parser.add_argument("--out-dir", type=Path, default=Path("solution/results/banking"))
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--top-k", type=int, default=8)
+    parser.add_argument("--candidate-k", type=int, default=0)
+    parser.add_argument("--candidate-pool", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--max-new-tokens", type=int, default=32)
     parser.add_argument("--max-length", type=int, default=4096)
+    parser.add_argument("--python-experts", action="store_true")
+    parser.add_argument("--batched-experts", action="store_true")
+    parser.add_argument("--eager-experts", action="store_true")
     parser.add_argument("--final-eval", action="store_true")
     args = parser.parse_args()
 
@@ -55,16 +60,42 @@ def main() -> None:
         {"label_name": name, "label_desc": label_description(name)}
         for name in meta["old_intents"]
     ]
-    valid_labels = [x["label_name"] for x in labels]
 
     index = BM25Index([x["text"] for x in memory])
 
-    model, tokenizer = load_model(args.model_path)
+    model, tokenizer = load_model(
+        args.model_path,
+        python_experts=args.python_experts,
+        batched_experts=args.batched_experts,
+        eager_experts=args.eager_experts,
+    )
     prompts: list[str] = []
+    row_labels_list: list[list[dict]] = []
     for row in rows:
-        hits = index.search(row["text"], k=args.top_k)
-        examples = [memory[h.index] for h in hits]
-        messages = build_banking_messages(row["text"], examples, labels)
+        search_k = max(args.top_k, args.candidate_pool) if args.candidate_k else args.top_k
+        hits = index.search(row["text"], k=search_k)
+        examples = [memory[h.index] for h in hits[: args.top_k]]
+        if args.candidate_k:
+            row_labels: list[dict] = []
+            seen: set[str] = set()
+            for hit in hits:
+                lab = memory[hit.index]
+                name = lab["label_name"]
+                if name in seen:
+                    continue
+                seen.add(name)
+                row_labels.append({
+                    "label_name": name,
+                    "label_desc": lab.get("label_desc") or label_description(name),
+                })
+                if len(row_labels) >= args.candidate_k:
+                    break
+            if len(row_labels) < 2:
+                row_labels = labels
+        else:
+            row_labels = labels
+        row_labels_list.append(row_labels)
+        messages = build_banking_messages(row["text"], examples, row_labels)
         prompts.append(render_prompt(tokenizer, messages, force_final=True))
 
     outputs = generate_batch(
@@ -79,10 +110,14 @@ def main() -> None:
     predictions = []
     correct = 0
     parse_failures = 0
-    for row, raw in zip(rows, outputs):
+    candidate_recall_total = 0
+    for row, raw, row_labels in zip(rows, outputs, row_labels_list):
+        valid_labels = [x["label_name"] for x in row_labels]
         pred = parse_label(raw, valid_labels)
         ok = pred == row["label_name"]
+        candidate_recall = row["label_name"] in valid_labels
         correct += int(ok)
+        candidate_recall_total += int(candidate_recall)
         parse_failures += int(pred is None)
         predictions.append(
             {
@@ -92,6 +127,8 @@ def main() -> None:
                 "pred": pred,
                 "correct": ok,
                 "raw": raw,
+                "candidates": valid_labels,
+                "candidate_recall": candidate_recall,
             }
         )
 
@@ -103,6 +140,9 @@ def main() -> None:
         "split": args.split,
         "n": len(rows),
         "top_k": args.top_k,
+        "candidate_k": args.candidate_k,
+        "candidate_pool": args.candidate_pool,
+        "candidate_recall": candidate_recall_total / len(rows) if rows else 0.0,
         "accuracy": accuracy,
         "correct": correct,
         "parse_failures": parse_failures,

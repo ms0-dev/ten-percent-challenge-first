@@ -1,0 +1,9 @@
+{
+  "dataset": "PolyAI/banking77",
+  "variant": "10_family_grouped",
+  "note": "10-family commercial support router; exam locked before grouped model development. Mapping is based on intent names only.",
+  "sha256": {
+    "old_test.jsonl": "f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872",
+    "new_test.jsonl": "8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd"
+  }
+}

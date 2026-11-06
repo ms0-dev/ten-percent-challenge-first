@@ -17,7 +17,15 @@ def load_model(
     device_map: str | dict = "auto",
     dtype: str = "auto",
     attn_implementation: str = "eager",
+    python_experts: bool = False,
+    batched_experts: bool = False,
+    eager_experts: bool = False,
 ):
+    if python_experts:
+        from python_experts import load_compressed_python
+
+        return load_compressed_python(model_path)
+
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -35,6 +43,10 @@ def load_model(
         attn_implementation=attn_implementation,
         trust_remote_code=True,
     )
+    if batched_experts:
+        model.config._experts_implementation = "batched_mm"
+    if eager_experts:
+        model.config._experts_implementation = "eager"
     model.eval()
     return model, tokenizer
 

@@ -112,9 +112,20 @@ def main() -> None:
     config["num_experts_per_tok"] = min(4, args.k)
     (args.out_dir / "config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
 
-    # Report parameter counts and bytes.
+    # Report logical parameter counts and bytes. The MXFP4 expert weights are
+    # stored as U8 blocks with two 4-bit values per byte, so `numel()` of a
+    # `*_blocks` tensor is half the logical parameter count. `*_scales` are
+    # quantization metadata, not model parameters.
     def count_params(tensors: dict[str, torch.Tensor]) -> int:
-        return sum(t.numel() for t in tensors.values())
+        total = 0
+        for key, tensor in tensors.items():
+            if key.endswith(".gate_up_proj_blocks") or key.endswith(".down_proj_blocks"):
+                total += 2 * tensor.numel()
+            elif key.endswith("_scales"):
+                continue
+            else:
+                total += tensor.numel()
+        return total
 
     out_params = count_params(output)
     base_params = 0

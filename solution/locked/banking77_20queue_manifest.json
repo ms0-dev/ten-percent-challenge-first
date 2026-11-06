@@ -1,0 +1,9 @@
+{
+  "dataset": "PolyAI/banking77",
+  "variant": "20_queue_grouped",
+  "note": "10-queue grouping folded into 20 queues; exam locked before grouped model development. Mapping is based on intent names only.",
+  "sha256": {
+    "old_test.jsonl": "53c66c72e322fc82165c6ebb544140cae30c66351e2f8f2a8fe85d574e3a174a",
+    "new_test.jsonl": "8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd"
+  }
+}

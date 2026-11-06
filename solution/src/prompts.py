@@ -19,6 +19,14 @@ QA_SYSTEM = (
     "Return a short extractive answer copied from the context. Do not explain."
 )
 
+QA_MC_SYSTEM = (
+    "You are a precise customer-support question-answering assistant. "
+    "Reasoning: low. You are given a question, supporting context passages, "
+    "and four answer options. Choose the single option that correctly answers "
+    "the question using the context. Return only the option letter "
+    "(A, B, C, or D). Do not explain."
+)
+
 
 def build_banking_messages(
     query: str,
@@ -99,6 +107,48 @@ def parse_label(text: str, valid_labels: Sequence[str]) -> str | None:
     close = difflib.get_close_matches(first, list(by_norm), n=1, cutoff=0.72)
     if close:
         return by_norm[close[0]]
+    return None
+
+
+def build_qa_mc_messages(question: str, passages: Sequence[str], options: Sequence[str]) -> list[dict]:
+    context = "\n\n".join(f"[Passage {i + 1}]\n{p}" for i, p in enumerate(passages))
+    option_lines = "\n".join(f"{chr(65 + i)}. {opt}" for i, opt in enumerate(options))
+    user = (
+        f"Context:\n{context}\n\n"
+        f"Question: {question}\n\n"
+        f"Options:\n{option_lines}\n\n"
+        "Return only the letter of the correct option (A, B, C, or D)."
+    )
+    return [
+        {"role": "system", "content": QA_MC_SYSTEM},
+        {"role": "user", "content": user},
+    ]
+
+
+def parse_option(text: str, options: Sequence[str]) -> int | None:
+    raw = parse_final(text).strip()
+    if not raw:
+        return None
+    upper = raw.upper()
+    # Direct letter at the start: "A", "A.", "(A)", "A)".
+    match = re.match(r"^\s*\(?([A-D])\)?\s*(?:[.):]|$)", upper)
+    if match:
+        return ord(match.group(1)) - ord("A")
+    # "Option A" / "Answer: B".
+    match = re.search(r"\b(?:OPTION|ANSWER(?:\s+IS)?)\s*[:\-]?\s*\(?([A-D])\)?\b", upper)
+    if match:
+        return ord(match.group(1)) - ord("A")
+    # A standalone letter anywhere.
+    match = re.search(r"\b([A-D])\b", upper)
+    if match:
+        return ord(match.group(1)) - ord("A")
+    # Fallback: match the option text.
+    normalized_raw = normalize_answer(raw)
+    for i, opt in enumerate(options):
+        if normalized_raw == normalize_answer(opt):
+            return i
+        if normalize_answer(opt) and normalize_answer(opt) in normalized_raw:
+            return i
     return None
 
 
