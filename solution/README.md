@@ -15,9 +15,10 @@ The full proof is in [`PROOF.md`](PROOF.md). This README is the short version.
   - Base: **95.80%** (958/1,000)
   - Compressed: **96.00%** (960/1,000)
   - Zero parse failures for both.
-- Growth: 10 new intents from 50 feedback examples, **0% -> 91.25%** on a
-  400-example held-out new-intent test, with the model SHA-256 unchanged. The
-  locked exam was re-run after growth: **96.00%** again.
+- Growth: 10 new intents from 50 feedback examples, **36.25% -> 88.50%** on a
+  400-example held-out new-intent test, by overwriting ten existing output rows
+  in the model. **0 bytes added**; the model file is still 6,402,132,448 B.
+  The locked exam was re-run after growth: **96.00%** again.
 
 The size rule was clarified by the maintainer in
 [issue #1](https://github.com/DeusExperiments/ten-percent-challenge/issues/1):
@@ -38,12 +39,12 @@ weights are quantized; the proof reports both numbers.
    per-tensor type mix. Final artifact:
    `qwen3-k96-udmix.gguf`, SHA-256
    `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e`.
-4. **Evaluate the locked exam once.** Base 95.80%, compressed 96.00%.
-5. **Grow from feedback without training or RAG.** Freeze the model. Compute
-   the last-token hidden state of each feedback text, center the features, and
-   store one prototype per new intent in a small sidecar head (81,920 bytes).
-   New-intent accuracy goes 0% -> 91.25%; old weights and the old locked-exam
-   score are unchanged.
+4. **Evaluate the locked exam before growth.** Base 95.80%, compressed 96.00%.
+5. **Grow from feedback without training or RAG.** Freeze the model. Overwrite
+   ten existing `lm_head` rows, one per new intent, with the mean final hidden
+   state of that intent's five feedback examples. No external head, no memory
+   file, no context edit, and no new bytes. New-intent accuracy goes
+   36.25% -> 88.50%; the old locked-exam score stays 96.00%.
 
 ## Files
 
@@ -54,7 +55,10 @@ weights are quantized; the proof reports both numbers.
 - `src/compress_qwen3.py` - top-K expert checkpoint builder.
 - `src/eval_banking.py` - Transformers eval for the base.
 - `src/eval_banking_llamacpp.py` - llama.cpp eval for the compressed GGUF.
-- `src/growth_prototype.py` - training-free new-intent head.
+- `src/extract_inmodel_features.py` - final-norm features for feedback.
+- `src/apply_inmodel_growth.py` - writes prototypes into existing output rows.
+- `src/growth_prototype.py` - earlier exploratory sidecar head, not used in
+  the final proof.
 - `modal_app.py` - all Modal jobs (router calibration, compression, GGUF
   conversion, quantization, evals, growth, hashing).
 
@@ -69,6 +73,10 @@ weights are quantized; the proof reports both numbers.
   prompt.
 - **Uniform IQ2_XXS / IQ2_XS** on the 96-expert model scores 94.0% / 95.33%.
   The dynamic per-tensor mix is what recovers the base score at the same size.
+- **An external prototype head** reached 91.25% on the new intents, but it is
+  a separate parameter file. It was discarded: the final growth edit writes
+  the prototypes into the model's existing output rows, adds no bytes, and
+  scores 88.50%.
 
 ## Reproduction
 
@@ -82,5 +90,6 @@ Modal; the volume is `ten-percent-challenge`.
 - The base is evaluated with Transformers and the compressed artifact with
   llama.cpp. The prompt construction, retrieval, tokenizer, greedy decoding,
   and parser are identical; both have zero parse failures on the locked exam.
-- The growth head is a sidecar over frozen hidden states. It adds new-intent
-  capability without changing the old model or its locked-exam score.
+- The growth edit overwrites ten existing output rows in the model's `lm_head`.
+  It adds no external head or memory; the old label rows and the old locked-exam
+  score are unchanged.

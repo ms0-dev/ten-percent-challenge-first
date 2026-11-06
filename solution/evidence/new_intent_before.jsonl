@@ -1,0 +1,400 @@
+{"id": "banking77-test-160", "text": "My statement has a dollar I have been charged showing up on it.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-161", "text": "Why is there a fee for an extra pound in my statement?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-162", "text": "I'm not okay with this fee on my statement.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-163", "text": "Why is there an extra dollar charged to my account?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-164", "text": "There is a fee I don't recognize on my statement.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-165", "text": "I would like a refund on the extra pound I was charged.", "gold": "extra_charge_on_statement", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-166", "text": "Can you explain what this random $1 charge is?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-167", "text": "What is this $1 charge on my statement?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-168", "text": "Why does my statement have these extra charges?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-169", "text": "I do not remember purchasing anything for 1£, and it is on my statement. Can you please tell me what that is about?", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-170", "text": "I can see an extra 1£ charge on my app. Why did you charge me extra?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-171", "text": "Can you tell me why I noticed a $1 charge on my statement?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-172", "text": "When will the $1 transaction be credited to me?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-173", "text": "Where did this fee come from?", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-174", "text": "I noticed an extra $1 charge on my statement, can you tell me why that is?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-175", "text": "There is an extra $1 charge", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-176", "text": "I need information about an extra €1 fee in my statement.", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-177", "text": "Why is there an extra 1 pound charge on my card?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-178", "text": "Why are there so many fees on my statement?", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-179", "text": "What would be the reason there's an extra fee on my statement?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-180", "text": "Where did this 1 euro fee come from?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-181", "text": "I got a extra €1 fee in my statement", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-182", "text": "I have a 1 euro fee on my statement.", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-183", "text": "Why was I overcharged a pound!?", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-184", "text": "Something went wrong, I was charged an extra pound?", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-185", "text": "Where did the extra fee on my statement come from?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-186", "text": "There is an extra charge on my app that I was not told about or I was aware of!", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-187", "text": "I am seeing an extra fee on my statement what is that for?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-188", "text": "What is this €1 fee in my statement?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-189", "text": "I am a new customer, and I happened to look at my app and there is a charge I am not familiar with.  Could you tell me why the extra charge is there?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-190", "text": "For some reason my account's been charged an extra dollar.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-191", "text": "There is a transaction for $1 and I don't know why it was charged.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-192", "text": "Can you help me with a weird charge?  It's a pound charge that never goes away from the statement view on the app I'm using.  It's not described as anything but \"Pending\", and that status has never changed during the last two days.", "gold": "extra_charge_on_statement", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-193", "text": "What is the purpose of the extra fee that is showing up on my statement?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-194", "text": "$1 extra has been charged on my statement, why is that?", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-195", "text": "What is the extra  €1 fee in my statement", "gold": "extra_charge_on_statement", "pred": "extra_charge_on_statement", "correct": true}
+{"id": "banking77-test-196", "text": "It's been two weeks, why has the transaction for $1.00 not been reversed?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-197", "text": "What is the €1 fee for?", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-198", "text": "I'm quite confused as to what is going on. There is some odd extra pound charge on my statement in the app that's just listed as pending and doesn't go away since a couple days.", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-199", "text": "Can you please check why I am having this extra fee on my statement.", "gold": "extra_charge_on_statement", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-920", "text": "Where can I obtain my virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-921", "text": "How do you get a virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-922", "text": "Where can I find a virtual card?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-923", "text": "Is there an option to have a virtual card?", "gold": "getting_virtual_card", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-924", "text": "If I don't want a physical card can i get a virtual version?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-925", "text": "I requested a virtual card but it is not showing up. Why?", "gold": "getting_virtual_card", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-926", "text": "Can you tell me how to order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-927", "text": "Where is the virtual card?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-928", "text": "what is the virtual card", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-929", "text": "how do i get a virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-930", "text": "Where do I order a virtual card from?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-931", "text": "Why did I not get a virtual card yet?", "gold": "getting_virtual_card", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-932", "text": "How can I order virtual cards?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-933", "text": "Can you tell me where I can order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-934", "text": "Is it possible for me to get a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-935", "text": "Is this where I order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-936", "text": "What are the steps to getting a virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-937", "text": "help me obtain a virtual card", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-938", "text": "Where is the virtual card located?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-939", "text": "Where can I order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-940", "text": "Where do I obtain my virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-941", "text": "I want a virtual card!", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-942", "text": "I want one of those virtual cards!", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-943", "text": "Are virtual cards available to get?", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-944", "text": "Can you help me sign up for a virtual card?", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-945", "text": "Can I get a copy of the card by email?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-946", "text": "Where do I find the virtual card?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-947", "text": "why do i not have a virtual card", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-948", "text": "How do I order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-949", "text": "I thought I was going to get a virtual card but I haven't received it yet, how can we resolve this?", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-950", "text": "Please help me get a virtual card.", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-951", "text": "Can I order a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-952", "text": "Where can I go to get a virtual card?", "gold": "getting_virtual_card", "pred": "getting_virtual_card", "correct": true}
+{"id": "banking77-test-953", "text": "Where are the virtual cards located?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-954", "text": "I would like a virtual card- where can I purchase one?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-955", "text": "When should I receive my virtual card?", "gold": "getting_virtual_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-956", "text": "I need to reorder my virtual card!", "gold": "getting_virtual_card", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-957", "text": "Where can I get a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-958", "text": "Is there a way to obtain a virtual card?", "gold": "getting_virtual_card", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-959", "text": "Can I have one of the virtual cards?", "gold": "getting_virtual_card", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-960", "text": "Will my card be accepted all over the world?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-961", "text": "Who accepts this card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-962", "text": "Can I use my card for payment all over the world?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-963", "text": "It will be fine to use at any establishment that accepts Mastercard.", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-964", "text": "Where can the card be used?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-965", "text": "Can my card be used everywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-966", "text": "Are there any limits on where I can use my card?", "gold": "card_acceptance", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-967", "text": "What stores can I sue my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-968", "text": "Can I use my card anywhere I want?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-969", "text": "Is there anywhere my card will not be accepted?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-970", "text": "What are the rules to where I can use my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-971", "text": "Do you know where my card will be accepted?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-972", "text": "What places can I use my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-973", "text": "Is my card accepted everywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-974", "text": "What places will accept my card for payment?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-975", "text": "Does this card work everywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-976", "text": "\n\nWhat businesses accept this card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-977", "text": "Where can I use my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-978", "text": "Which outlets accept my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-979", "text": "I am traveling to Germany, Will I be able to use my card there?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-980", "text": "What stores will take my credit card as payment?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-981", "text": "Is there any place I cannot use my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-982", "text": "Will I be able to use my card anywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-983", "text": "Is my card usable anywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-984", "text": "Is it acceptable to use my card anywhere?", "gold": "card_acceptance", "pred": "card_acceptance", "correct": true}
+{"id": "banking77-test-985", "text": "Can I use my card everywhere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-986", "text": "Where is my card accepted?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-987", "text": "Where can I pay with my debit or credit card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-988", "text": "Where should my card work?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-989", "text": "areas card is accpeted", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-990", "text": "places i can use the card", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-991", "text": "Can I make online purchases with my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-992", "text": "Does every place of business accept this card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-993", "text": "What places will accept my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-994", "text": "Can I use my card anywere?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-995", "text": "Will any business take this card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-996", "text": "Will filling stations accept my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-997", "text": "Where am I able to use the card?", "gold": "card_acceptance", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-998", "text": "What can I use my card to pay for?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-999", "text": "Who accepts my card?", "gold": "card_acceptance", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1080", "text": "I have a strange payment in my statement", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1081", "text": "There is a charge on my card that I did not make", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1082", "text": "I saw a payment i did not do", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1083", "text": "There is a payment that is not mine in the app.  Please advise/", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1084", "text": "An unauthorized payment is in my app", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1085", "text": "I did not make this card payment.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1086", "text": "What should I do if I see a payment I didn't make?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1087", "text": "I found an unauthorized card payment", "gold": "card_payment_not_recognised", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1088", "text": "there is a transaction on my account that i didnt make", "gold": "card_payment_not_recognised", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1089", "text": "I don't recall making that payment?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1090", "text": "There are some payments with my card that I don't know where they are coming from. Just checked today and it's been since a couple days as well! What to I do? Can I revert this retrospectively? My card needs to be frozen immediately as well!", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1091", "text": "Has someone accessed my card there are payments I did not make that are showing up on the app.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1092", "text": "There are some strange charges on my card that I didn't make from a few days ago.  Is my card stolen and if so should I cancel it?  Will I get refunded the charges?", "gold": "card_payment_not_recognised", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1093", "text": "Why would there be a payment on my account I don't recognize?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1094", "text": "I have a payment I didn't do", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1095", "text": "There is a payment that is not mine.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1096", "text": "Can you freeze my account?  I just saw there are transactions on my account that I don't recognize.  How can I fix this?", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1097", "text": "There is a card payment I do not recognise.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1098", "text": "I don't recognise a card payment", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1099", "text": "Payment i did not do", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1100", "text": "Please put a freeze on my card,  I am worried there has been some payments on it and I don't know what for.", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1101", "text": "I think my statement has a fraudulent charge", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1102", "text": "I'm concerned about a payment that has recently been made on my card.  I do not recognize the name that the transaction went to, can you help me?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1103", "text": "What should I do to get transactions off of my account if I didn't make them?  My card must have been compromised and I need to freeze it asap!", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1104", "text": "I have a payment listed in error.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1105", "text": "What can I do about some payments on my card I didn't make.  Please put a freeze on my card till we can figure this out.", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1106", "text": "I'm not familiar with a card payment.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1107", "text": "I have an unauthorized transaction on my statement", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1108", "text": "There is a payment in the App that is not mine.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1109", "text": "I don't know where this transaction came from?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1110", "text": "I see a charge on my account that I don't recall making. I feel like my account may have been compromised.", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1111", "text": "I know I didn't make this payment showing up on my card, I don't remember this person at all.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1112", "text": "Somebody used my card to make a purchase", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1113", "text": "There's a recent charge on my card that I know I didn't make because I've never seen the name before. Can we investigate this?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1114", "text": "Some of my card payments look different than where I purchased products from. Why is that?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1115", "text": "There is a strange payment on my statement. What should I do?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1116", "text": "I think there has been a purchase made that wasn't by me.", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1117", "text": "There is a fraudulent charge on my statement.", "gold": "card_payment_not_recognised", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1118", "text": "What is the payment in my account that I did not do?", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1119", "text": "In my statement there is a payment that is I do not recognize", "gold": "card_payment_not_recognised", "pred": "card_payment_not_recognised", "correct": true}
+{"id": "banking77-test-1360", "text": "How can i get multiple disposble cards.", "gold": "disposable_card_limits", "pred": "getting_virtual_card", "correct": false}
+{"id": "banking77-test-1361", "text": "Can I make many disposable cards per day?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1362", "text": "I need to use my disposable card multiple times a day, is there a cutoff limit?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1363", "text": "How do I make more than one disposable card in a day?", "gold": "disposable_card_limits", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1364", "text": "Can I have more than one disposable card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1365", "text": "what is the disposable cards limit?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1366", "text": "What's the most disposable cards I can have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1367", "text": "Do these virtual cards have any caps on using them?", "gold": "disposable_card_limits", "pred": "disposable_card_limits", "correct": true}
+{"id": "banking77-test-1368", "text": "How many disposable cards can I have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1369", "text": "What is the amount of disposable cards I can have each day?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1370", "text": "How many disposable cards per day am I allowed to have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1371", "text": "How many card payments can I use on a disposable card?", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1372", "text": "What if I need multiple disposable cards?", "gold": "disposable_card_limits", "pred": "getting_virtual_card", "correct": false}
+{"id": "banking77-test-1373", "text": "If I have more than one disposable card, can I make five payments on each of them?", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1374", "text": "Are you able to explain the restrictions of the disposable cards?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1375", "text": "What is the maximum number of transactions I can make with one card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1376", "text": "What is the limit to number of transactions I can do with a disposable card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1377", "text": "How many disposable cards is the limit?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1378", "text": "Tell me how many transactions I can do with a disposable card.", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1379", "text": "I have to have several disposable cards per day.", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1380", "text": "I would like to know any restrictions for the disposable cards.", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1381", "text": "How can I create many temporary cards daily?", "gold": "disposable_card_limits", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-1382", "text": "Is it possible to make several disposable cards in a day?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1383", "text": "How many disposable cards can I make in a single day?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1384", "text": "Is there a limit to how many transactions I can make on one disposable card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1385", "text": "Are there any limits to how many disposable cards I can use?", "gold": "disposable_card_limits", "pred": "disposable_card_limits", "correct": true}
+{"id": "banking77-test-1386", "text": "Can you explain the virtual cards limit?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1387", "text": "How many disposable virtual cards can I have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1388", "text": "I need to create several disposable cards per day.", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1389", "text": "Are there any hindrances to using a disposable virtual card?", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1390", "text": "How many disposable cards can I own?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1391", "text": "How many virtual cards do I get?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1392", "text": "What is the limit to disposable cards you can have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1393", "text": "How many times can I use a disposable card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1394", "text": "What can I use a virtual disposable card for?", "gold": "disposable_card_limits", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1395", "text": "Do you know what the restriction of the disposable cards are?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1396", "text": "What are the limits for disposable virtual cards?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1397", "text": "What are the limits to using disposable virtual cards?", "gold": "disposable_card_limits", "pred": "disposable_card_limits", "correct": true}
+{"id": "banking77-test-1398", "text": "How many transactions can I do with one disposable card?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1399", "text": "How many times can I use the disposable virtual card I have?", "gold": "disposable_card_limits", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1760", "text": "The refund isn't showing up on my account.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1761", "text": "My refund is missing from my statement.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1762", "text": "I requested a refund, and never received it. What can I do?", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1763", "text": "I was supposed to get a purchase refunded but I don't see the money in my account", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1764", "text": "There's a refund missing from my statement", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1765", "text": "I need help. I asked for a refund from a merchant a while ago, but I have not gotten my money back. I keep checking my account, but nothing is showing up. What should I do now?", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1766", "text": "I am awaiting my refund", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1767", "text": "How long does it take for a refund?", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1768", "text": "Help! I keep checking my account, but my refund is not showing. I requested that a seller refund my money a while back, but there is no money showing in my account. What can you do for me?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1769", "text": "Can you tell me why my refund is not showing in my statement?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1770", "text": "I asked for a refund last week but nothing has happened yet, can you help me please?", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1771", "text": "Why is my refund missing from my  statement?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1772", "text": "Still waiting on a refund.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1773", "text": "I requested a refund and it is missing.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1774", "text": "Hi, As suggested by you, i have asked the seller to initiate the refund, it has been a week and i haven't received my money. Please advise.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1775", "text": "I bought something and returned it and the money from the return isn't in my account.", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1776", "text": "Do you have any idea on when I will receive my refund? I got my statement and it was not there.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1777", "text": "Why isn't a recent refund on my statement?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1778", "text": "Where can I see the refund in my account", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1779", "text": "i was supposed to get a refund but my balance hasn't changed, why not?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1780", "text": "I requested a refund from a merchant days ago but I do not see it in my account.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1781", "text": "The refund has not appeared in my account", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1782", "text": "Did my refund go through? It's not on my statement.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1783", "text": "My statement doesn't show that a refund has processed", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1784", "text": "I requested a refund from a store but it hasn't arrived.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1785", "text": "I still haven't seen a refund on my account", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1786", "text": "I am missing a refund.", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1787", "text": "My refund doesn't seem to be showing on my statement.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1788", "text": "I am not seeing a refund in my statement.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1789", "text": "Why can't I see a recent refund in my statement?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1790", "text": "I did what you told me earlier and contacted the seller for a refund directly, but nothing is happening! It's been a week and I still haven't got anything. Please just give me back my money", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1791", "text": "Where is my refund? I have been checking my account all day.", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1792", "text": "It's been a week and I have done everything that I was asked to do and still nothing. I have contacted the seller and have not gotten a response. Please understand my frustration and put the money back in my account.", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1793", "text": "My refund is missing", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1794", "text": "Why doesn't a return show up im my account from a purchase I made?", "gold": "Refund_not_showing_up", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-1795", "text": "I keep checking my bank statements but I don't see a refund that I've requested from a seller. Can you ensure that I receive the refund from the seller?", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1796", "text": "I am waiting patiently for a week now for the seller to get back to me and there has been no response, could you please help me further with getting my money back.  Thank you.", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1797", "text": "I would like some help getting a refund back from a seller. It still isn't showing up on my statement and I requested this a long time ago. I'm not sure why it's not returned yet. Can you assist me in getting this money back?", "gold": "Refund_not_showing_up", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-1798", "text": "How long will it take to get my refund", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-1799", "text": "I should have received a refund however it is not showing on my statement", "gold": "Refund_not_showing_up", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2240", "text": "Will salary be received through this?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2241", "text": "How can I get paid in a different currency?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2242", "text": "Can I receive my salary in a currency other than what it is deposited in?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2243", "text": "Can I get my salary through this?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2244", "text": "How can someone send me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2245", "text": "Is there a problem with receiving my salary in GBP?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2246", "text": "Do I need to choose GBP to get my salary deposited properly?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2247", "text": "I get paid in GBP. Should I configure this and if so, where?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2248", "text": "Is it possible for me to get money out in a different currency?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2249", "text": "Can I use this to receive my salary?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2250", "text": "My salary is received in the form of GBP. Do I need to do anything specific to configure this?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2251", "text": "How do people send me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2252", "text": "Is GBP a supported currency?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2253", "text": "Do I need to establish I am paid in GBP before a transfer?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2254", "text": "Salary in GBP has been received, does it need to be configured elsewhere?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2255", "text": "How do i get my salary in the account?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2256", "text": "What are the ways for others to transfer me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2257", "text": "What different ways are there for someone to send me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2258", "text": "What do I need to do to transfer my paycheck to my account?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2259", "text": "How can my friend send me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2260", "text": "Can I directly transfer my salary onto here?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2261", "text": "Can this be used to receive my salary?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2262", "text": "Is it possible to deposit money in GBP?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2263", "text": "I received my salary in GBP. How do I change this to my currency?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2264", "text": "How can my friend transfer money to me?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2265", "text": "Can my friends send me money?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2266", "text": "How do I deposit my paycheck to this account?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2267", "text": "Can I use this account to receive my salary?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2268", "text": "Can i deposit my salary to this account?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2269", "text": "How do I get my salary through this account?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2270", "text": "What if I need my salary in a different currency?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2271", "text": "I receive my salary in GBP. Do I need to configure this somehwere?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2272", "text": "Do you know if I can use this for my salary?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2273", "text": "How do I get my paycheck through this?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2274", "text": "can I transfer my salary if it's in a different currency?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2275", "text": "Can I get paid in a different currency?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2276", "text": "Is my salary eligible for this?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2277", "text": "My salary is in GBP; how can I note this in the app?", "gold": "receiving_money", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2278", "text": "Can I get paid in another currency?", "gold": "receiving_money", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2279", "text": "Can I get my paycheck through here?", "gold": "receiving_money", "pred": "receiving_money", "correct": true}
+{"id": "banking77-test-2680", "text": "I made a transfer a few hours ago from a UK banking account.  I do not yet see the transfer.  Please check on this for me.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2681", "text": "the balance on my account didnt change when i transferred money", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2682", "text": "How long will it take for my transferred money to show up?", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2683", "text": "Why didn't my balance change after I transferred some money?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2684", "text": "When will my balance update after a transfer?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2685", "text": "How long does it take for an international transfer into my account?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2686", "text": "The amount of time that transfers usually take from a UK account is what?I just completed a transfer and it is not showing up at all. I'm wondering at this point if everything is actually okay.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2687", "text": "When will my transfer be available in my account.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2688", "text": "I didn't get the money I transferred", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2689", "text": "I just completed a bank transfer and the balance didn't update", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2690", "text": "I transferred some money but I think it has gotten lost somewhere.", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2691", "text": "How long does a UK transfer take?", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2692", "text": "Hello I made a bank transfer couple hours ago from my UK account but it doesn't show up yet. Can you please check if everything is alright with it?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2693", "text": "I made a transfer and am still waiting.", "gold": "balance_not_updated_after_bank_transfer", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2694", "text": "I made an out of country transfer and it hasn't went through yet.", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2695", "text": "After the transfer, the balance did not update.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2696", "text": "Could you please check one of my transfer which i made few hours ago from my UK bank account, as its not showing yet.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2697", "text": "I had cash transferred but the balance did not change.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2698", "text": "I can't see my latest bank transfer", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2699", "text": "My bank transfer is still not showing up in my account.", "gold": "balance_not_updated_after_bank_transfer", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2700", "text": "I made a transfer and it doesnt' show up in my account.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2701", "text": "I transferred some money but it is yet to arrive.", "gold": "balance_not_updated_after_bank_transfer", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2702", "text": "Why is my balance the same?  I processed a transfer.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2703", "text": "Why don't I have my transfer?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2704", "text": "Why isn't the transfer on my account showing up?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2705", "text": "The  money I transferred does not show in the balance.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2706", "text": "I have completed a transfer but it is not showing up.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2707", "text": "I did a transfer to my account but it doesn't show up", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2708", "text": "How long until my transfer will be available to me", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2709", "text": "Why doesn't it show that I did a balance transfer?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2710", "text": "I made a bank transfer a couple of hours ago from my UK account.  It hasn't appeared, can you check to make sure it went through?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2711", "text": "My transfer is pending.", "gold": "balance_not_updated_after_bank_transfer", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2712", "text": "Hey, I try to make a bank transfer from my UK account a few hours ago, but it haven't show up yet. Please check my account to make sure everything alright with it?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2713", "text": "Where is my transfer from [country]?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2714", "text": "I made a bank transfer and my account balance did not show it.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2715", "text": "Where is my money? I transfered it and it isn't in my account.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2716", "text": "I need to know the time frame that is typical for a transfer from a UK account. I just made a transfer and it doesn't appear. I want to make sure everything is okay.", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2717", "text": "Why doesn't my balance reflect my transfer", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2718", "text": "My account balance has not gone up even though I just transferred money into it", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2719", "text": "When will I see my new balance after making my bank transfer?", "gold": "balance_not_updated_after_bank_transfer", "pred": "balance_not_updated_after_bank_transfer", "correct": true}
+{"id": "banking77-test-2840", "text": "Could you please activate my card", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2841", "text": "I need to activate my card can you do that now?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2842", "text": "What do I need to do to activate my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2843", "text": "Tell me how to go about activating my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2844", "text": "How can I activate my card so I can start using it?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2845", "text": "How long will it take to activate my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2846", "text": "What's the right way to activate my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2847", "text": "I received my new card, how is it activated?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2848", "text": "Is there a way my new card can be renewed?", "gold": "activate_my_card", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2849", "text": "How do I activate a card I received?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2850", "text": "Why can't I activate my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2851", "text": "What is the process of card activation?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2852", "text": "WHAT CAN I DO AFTER THE CARD MISSING", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2853", "text": "I got my new card where do I go to activate it?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2854", "text": "Would like to use my card and need to activate it first.  Can you help me do this?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2855", "text": "I need help activating my new card.", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2856", "text": "how to activate card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2857", "text": "Please, activate my card", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2858", "text": "I tried activating my bill of fare and it didn't workplace", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2859", "text": "I just got my card and want to use it, how do I activate my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2860", "text": "I have a new card and I want to activate it", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2861", "text": "Assist me please with card activation.", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2862", "text": "I need help with activating my card", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2863", "text": "How can I start using my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2864", "text": "Activating my card", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2865", "text": "When will my card be activated?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2866", "text": "How can I activate my card>", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2867", "text": "What are the steps in order to activate my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2868", "text": "How do I go about activating my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2869", "text": "What is the activation process on my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2870", "text": "I would like to get help from someone with activating my card.", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2871", "text": "What is the process for activating my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2872", "text": "How do I use my new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2873", "text": "I got my new card but I am not sure if it need s activated and how?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2874", "text": "What are the steps to activating a new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2875", "text": "I would like to activate my card to use now, can you help me?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2876", "text": "How do I activate a new card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2877", "text": "I just got this card & I don't know how to activate it.", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2878", "text": "I got my new card. How do I activate it?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2879", "text": "What do I need to do to activate my card?", "gold": "activate_my_card", "pred": "activate_my_card", "correct": true}
+{"id": "banking77-test-2960", "text": "Is the top up feature available on the Apple Watch?", "gold": "apple_pay_or_google_pay", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2961", "text": "Can I use the system Google Pay for top-ups?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2962", "text": "My top-up for Google Pay isn't working", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2963", "text": "Can I add money with Apple Pay?", "gold": "apple_pay_or_google_pay", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2964", "text": "Can I use my Apple Watch to to top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2965", "text": "Does Apple Pay give the option to top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2966", "text": "Top up on my Google Pay isn't working.", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2967", "text": "Is it possible to top up with Apple Pay?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2968", "text": "do i have to setup apple pay to use it", "gold": "apple_pay_or_google_pay", "pred": "apple_pay_or_google_pay", "correct": true}
+{"id": "banking77-test-2969", "text": "Can I use Apple Pay to top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2970", "text": "How can I top up my Google Pay?", "gold": "apple_pay_or_google_pay", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2971", "text": "Does Google Play have an app to Top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2972", "text": "I received my American Express card, but I am having problems making it work with Apple pay.  Can you help me with this problem?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2973", "text": "is apple pay eligible for top up", "gold": "apple_pay_or_google_pay", "pred": "apple_pay_or_google_pay", "correct": true}
+{"id": "banking77-test-2974", "text": "Why can't I use my American Express with Apple Pay to top up my account?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2975", "text": "how do i add money with my apple watch", "gold": "apple_pay_or_google_pay", "pred": "receiving_money", "correct": false}
+{"id": "banking77-test-2976", "text": "If I want to top up, can I use Apple Pay?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2977", "text": "can i top up with apple pay", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2978", "text": "My American express is experiencing a problem with apple play with top up, can you fix it?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2979", "text": "My top up is not working in Apple Pay.", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2980", "text": "Is Apple Pay a possible top up option?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2981", "text": "I don't know how to top up my Google pay.", "gold": "apple_pay_or_google_pay", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2982", "text": "Can I top up from my Apple Watch?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2983", "text": "Can I use my American Express stored in Apple Pay to top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2984", "text": "is apple pay costly?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2985", "text": "How can I top up with Google Pay?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2986", "text": "I can't top up my account using my American Express with Apple Pay.", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2987", "text": "I got my American Express in Apple Pay, why is top up not working?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2988", "text": "I got my American Express in Apple Bay but top up is not working", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2989", "text": "How do I top up? Can I use my apple watch?", "gold": "apple_pay_or_google_pay", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2990", "text": "Is it possible to use Apple Pay to put money in my account?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2991", "text": "My American Express is in my Apple Pay and the top up is failing, why?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2992", "text": "How can I top-ff my account using my Apple Watch?", "gold": "apple_pay_or_google_pay", "pred": "balance_not_updated_after_bank_transfer", "correct": false}
+{"id": "banking77-test-2993", "text": "can google pay be used to make a top-up", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2994", "text": "How do I get the Top Up feature on my apple watch working?", "gold": "apple_pay_or_google_pay", "pred": "activate_my_card", "correct": false}
+{"id": "banking77-test-2995", "text": "How do I troubleshoot Google pay top up?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2996", "text": "How do I top up with Apple Pay?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2997", "text": "Why isn't my top up working using my saved American Express in ApplePay?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}
+{"id": "banking77-test-2998", "text": "How do I use the top up app with my apple watch?", "gold": "apple_pay_or_google_pay", "pred": "apple_pay_or_google_pay", "correct": true}
+{"id": "banking77-test-2999", "text": "Google pay and top up, I want it, can I get it?", "gold": "apple_pay_or_google_pay", "pred": "card_payment_not_recognised", "correct": false}

@@ -16,6 +16,10 @@ training.
 | **Locked exam (1,000)** | **95.80%** | **96.00%** | **+0.20** |
 | Parse failures (locked) | 0 | 0 | - |
 
+After feedback the artifact is still **6,402,132,448 B (0 bytes added)**: ten
+existing `lm_head` rows are overwritten, the new-intent test goes **36.25% ->
+88.50%**, and the locked exam stays **96.00%**.
+
 The challenge's size rule was clarified by the maintainer: **"10% of size on
 disk is fine compared to fp16 equivalent weights"**
 ([issue #1](https://github.com/DeusExperiments/ten-percent-challenge/issues/1)).
@@ -101,12 +105,12 @@ statistics, and quantize.
 |---|---:|---:|---:|
 | Base Qwen3-30B (BF16) | 95.80% | 958 / 1,000 | 0 |
 | Compressed 6.40 GB GGUF | **96.00%** | **960 / 1,000** | 0 |
-| Compressed, re-run after growth | **96.00%** | **960 / 1,000** | 0 |
+| Compressed, after in-model growth | **96.00%** | **960 / 1,000** | 0 |
 
 The compressed model is **0.20 points above** the base (2 examples), well
 inside sampling noise. Both models produce a valid label on every example.
-The exam was re-run after the growth step on the byte-identical frozen model
-and produced the same score.
+The exam was re-run on the edited model (same 6,402,132,448 B; ten output
+rows changed) and produced the same score.
 
 Evidence: `evidence/base_exam_summary.json`,
 `evidence/compressed_exam_summary.json`, and
@@ -126,57 +130,69 @@ Evidence: `evidence/base_exam_summary.json`,
   The BM25 memory is benchmark data, identical for both models, and is not
   part of either model's size.
 - **No exam leakage.** The compressed artifact and the quant recipe were
-  frozen before the exam was read. The exam was read once per model; the
-  post-growth re-run uses the same frozen file.
+  frozen before the exam was read. The exam was read for the base, the
+  pre-growth compressed model, and the edited model; it was never used to
+  build, edit, or choose any model. The growth edit uses feedback only.
 
 ## Growth with user feedback
 
-The base weights are frozen. Growth adds a **new-intent sidecar head**; no
-feedback text is placed in the model context (no RAG), and no gradients or
-optimizer are used.
+The feedback is written **into the model's own existing output rows**. No
+external head, no memory file, no context editing, and no gradients. The
+checkpoint size does not change.
 
 - Feedback: 10 new Banking77 intents, 5 examples each (50 total).
 - Held-out new-intent test: 400 examples, SHA-256
   `8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd`.
-- Features: the compressed model's last-token hidden state (2,048-d) from
-  llama.cpp `--embeddings --pooling last`. The prompt is a fixed instruction;
-  it contains no feedback examples.
-- Head: features are centered by the mean of the old-memory + feedback
-  features and L2-normalized. Each new intent gets one prototype = the mean of
-  its five feedback vectors.
+- Feature: the exact last hidden state that feeds `lm_head` (final norm
+  applied), taken from the compressed model.
+- Ten existing output rows are chosen, one per new intent, from tokens in the
+  new label names: `_show`, `activate`, `apple`, `balance`, `_accept`,
+  `_payment`, `_limits`, `extra`, `getting`, `_money`. None of these tokens
+  appears in any of the ten old label names, and all ten are unique.
+- Each chosen row is overwritten with `0.01 x` the mean of the five feedback
+  hidden states for that intent (L2-normalized). This is a closed-form edit.
+  No row is added; the ten tokens are ordinary vocabulary entries.
+- Ten rows out of 151,936 are edited (0.0066% of the output head). Every other
+  parameter, including all old label rows, is untouched.
 
 | Phase | New-intent accuracy | Feedback leave-one-out |
 |---|---:|---:|
-| Before feedback (0 new prototypes) | 0 / 400 = **0.00%** | - |
-| After feedback (10 prototypes) | 365 / 400 = **91.25%** | 49 / 50 = **98.0%** |
+| Before feedback (original 10 rows) | 145 / 400 = **36.25%** | - |
+| After feedback (10 edited rows) | 354 / 400 = **88.50%** | 47 / 50 = **94.0%** |
+| Old locked exam, after growth | 960 / 1,000 = **96.00%** | 0 parse failures |
 
-- Head before: 0 x 2,048, 0 bytes.
-- Head after: 10 x 2,048 float32, **81,920 bytes**, SHA-256
-  `672c784c22d68022731314979faf915bcfe2826b44cdf763183c69a6a81dd8a5`.
-- Model SHA-256 before feedback = after feedback =
+- Model before: 6,402,132,448 B, SHA-256
   `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e`.
+- Model after: **6,402,132,448 B** (same size), SHA-256
+  `9b32863d41f8fc4f84266ae7dceb06fce80678bc1da95c2afd51cbb35e4a4feb`.
+- No external head or memory file. The class token IDs are metadata; the
+  feedback examples are not stored.
 
-"Keeps the old" is shown by the unchanged model file and the unchanged locked
-exam score (96.00% before and after growth). The new head only serves the ten
-new intents; the old 10-family generative router is byte-identical before and
-after growth.
+"Keeps the old" is shown by the unchanged old locked-exam score (96.00%
+before and after growth) and by the untouched old label rows. The edit only
+touches ten output rows that the old generative label path does not use.
 
-Evidence: `evidence/growth_summary.json`.
+Evidence: `evidence/growth_inmodel_report.json`,
+`evidence/new_intent_before.jsonl`, `evidence/new_intent_after.jsonl`,
+`evidence/grown_model.json`, and
+`evidence/compressed_exam_after_growth_summary.json`.
 
 ## Hashes and artifacts
 
 | Artifact | SHA-256 |
 |---|---|
 | Base shard manifest | `cc0892dd08f7fede868e61f640a34f11b304bddbdbf54bd24328768147235043` |
-| Compressed GGUF | `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e` |
+| Compressed GGUF, before feedback | `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e` |
+| **Grown model, after feedback** | `9b32863d41f8fc4f84266ae7dceb06fce80678bc1da95c2afd51cbb35e4a4feb` |
+| Edited output rows, before | `0c4d9955242012ce0a18b47e8bacc586f1099fc9b70459dd3a565e2f2a28856d` |
+| Edited output rows, after | `ed09b55ec5dbb24a876e664ce89d0800066fff2cba22e94e574313ef3528a228` |
 | Full 10-family locked exam | `f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872` |
 | 1,000-row locked exam subset | `8e2a8288e94c50542c2c40268ac6d8267c7746d3a58dcdbb8dd1926682610d44` |
 | New-intent test | `8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd` |
-| Grown new-intent head | `672c784c22d68022731314979faf915bcfe2826b44cdf763183c69a6a81dd8a5` |
 
-The compressed model lives on the Modal volume `ten-percent-challenge` at
-`/vol/models/gguf/qwen3-k96-udmix.gguf`; all eval JSONs are under
-`/vol/results/`.
+The pre-growth model is `/vol/models/gguf/qwen3-k96-udmix.gguf`; the grown
+model is `/vol/models/gguf/qwen3-k96-grown-udmix.gguf`. Both are
+6,402,132,448 bytes. All eval JSONs are under `/vol/results/`.
 
 ## Reproduction
 
@@ -218,16 +234,34 @@ modal run solution/modal_app.py::final_10_base_remote --limit 1000
 modal run solution/modal_app.py::llamacpp_banking_remote \
   --gguf /vol/models/gguf/qwen3-k96-udmix.gguf \
   --name qwen3-k96-udmix-final --split exam --final-eval --limit 1000
-modal run solution/modal_app.py::growth_prototype_remote
+
+# In-model growth: overwrite ten existing lm_head rows, no external head
+modal run solution/modal_app.py::inmodel_growth_extract_remote
+modal run solution/modal_app.py::inmodel_growth_apply_remote
+modal run solution/modal_app.py::convert_hf_to_gguf_remote \
+  --src /vol/models/compressed-qwen3-k96-grown \
+  --dst /vol/models/gguf/qwen3-k96-grown-bf16.gguf
+modal run solution/modal_app.py::quantize_gguf_remote \
+  --src /vol/models/gguf/qwen3-k96-grown-bf16.gguf \
+  --dst /vol/models/gguf/qwen3-k96-grown-udmix.gguf \
+  --qtype IQ2_XXS \
+  --imatrix /vol/models/gguf/qwen3-k96-imatrix.dat \
+  --tensor-type-file /vol/models/gguf/ud_tq1_0_types.txt
+modal run solution/modal_app.py::llamacpp_banking_remote \
+  --gguf /vol/models/gguf/qwen3-k96-grown-udmix.gguf \
+  --name qwen3-k96-grown-final --split exam --final-eval --limit 1000
 ```
 
 ## No-training evidence
 
 - `src/compress_qwen3.py`: slices/stacks exact base tensors.
 - `llama-quantize`: post-training quantization from the BF16 checkpoint.
-- `src/growth_prototype.py`: class means and a closed-form head. No
-  `loss.backward()`, no optimizer, no gradient step anywhere.
-- The model SHA-256 is identical before and after the feedback growth.
+- `src/apply_inmodel_growth.py`: overwrites ten existing `lm_head` rows with
+  feedback class means. No `loss.backward()`, no optimizer, no gradient step
+  anywhere.
+- The model file size is identical before and after growth (6,402,132,448 B);
+  only ten output rows change. The SHA-256 changes, as expected for a model
+  edit.
 
 ## Notes and limitations
 
@@ -237,10 +271,10 @@ modal run solution/modal_app.py::growth_prototype_remote
 - The base is evaluated with Transformers; the compressed artifact is a GGUF
   evaluated with llama.cpp. Prompt construction, retrieval, tokenizer, greedy
   decoding, and parsing are identical. Zero parse failures on the locked exam.
-- The growth head is a sidecar over frozen hidden states. It does not modify
-  the old generative router; the old locked-exam score is unchanged because
-  the model file is unchanged.
-- The new-intent growth test is separate from the official locked exam. A few
-  training-free heads were compared on it during development; the official
-  exam was never used for selection. The final head was chosen for simplicity
-  and leave-one-out performance.
+- The growth edit overwrites ten existing output rows in the model's `lm_head`.
+  It is an in-model weight edit, not an external head or memory. The old label
+  rows are untouched; no feedback text is stored.
+- The new-intent growth test is separate from the official locked exam. It was
+  used to report the final in-model growth; the official exam was never used
+  for selection. An earlier external prototype head was discarded because the
+  maintainer's step-5 clarification requires no external memory/parameters.

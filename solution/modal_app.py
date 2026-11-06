@@ -739,6 +739,50 @@ def download_gguf_remote(
 
 
 @app.function(
+    image=image,
+    volumes={"/vol": volume},
+    gpu="A100-80GB",
+    timeout=7200,
+    cpu=8,
+    memory=131072,
+)
+def inmodel_growth_extract_remote(
+    model_path: str = "/vol/models/compressed-qwen3-k96-banking10",
+) -> None:
+    _run([
+        sys.executable, "/src/extract_inmodel_features.py",
+        "--model-path", model_path,
+        "--data-dir", "/vol/data/banking77_10class",
+        "--out-dir", "/vol/results/growth_inmodel",
+    ])
+    volume.commit()
+
+
+@app.function(
+    image=image,
+    volumes={"/vol": volume},
+    timeout=14400,
+    cpu=16,
+    memory=131072,
+)
+def inmodel_growth_apply_remote(
+    model_path: str = "/vol/models/compressed-qwen3-k96-banking10",
+    alpha: float = 0.01,
+) -> None:
+    _run([
+        sys.executable, "/src/apply_inmodel_growth.py",
+        "--model-path", model_path,
+        "--features", "/vol/results/growth_inmodel/features.npz",
+        "--features-meta", "/vol/results/growth_inmodel/meta.json",
+        "--data-dir", "/vol/data/banking77_10class",
+        "--out-path", "/vol/models/compressed-qwen3-k96-grown",
+        "--report", "/vol/results/growth_inmodel/edit_report.json",
+        "--alpha", str(alpha),
+    ])
+    volume.commit()
+
+
+@app.function(
     image=llamacpp_image,
     volumes={"/vol": volume},
     gpu="A10",

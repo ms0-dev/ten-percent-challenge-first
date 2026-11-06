@@ -1,0 +1,79 @@
+{
+  "model_path": "/vol/models/compressed-qwen3-k96-banking10",
+  "out_path": "/vol/models/compressed-qwen3-k96-grown",
+  "alpha": 0.01,
+  "class_tokens": {
+    "Refund_not_showing_up": {
+      "id": 15267,
+      "text": "_show"
+    },
+    "activate_my_card": {
+      "id": 16856,
+      "text": "activate"
+    },
+    "apple_pay_or_google_pay": {
+      "id": 22377,
+      "text": "apple"
+    },
+    "balance_not_updated_after_bank_transfer": {
+      "id": 21571,
+      "text": "balance"
+    },
+    "card_acceptance": {
+      "id": 35728,
+      "text": "_accept"
+    },
+    "card_payment_not_recognised": {
+      "id": 26696,
+      "text": "_payment"
+    },
+    "disposable_card_limits": {
+      "id": 31820,
+      "text": "_limits"
+    },
+    "extra_charge_on_statement": {
+      "id": 15460,
+      "text": "extra"
+    },
+    "getting_virtual_card": {
+      "id": 50110,
+      "text": "getting"
+    },
+    "receiving_money": {
+      "id": 34065,
+      "text": "_money"
+    }
+  },
+  "old_classes": [
+    "account",
+    "card_management",
+    "card_payments",
+    "cash_atm",
+    "currency",
+    "direct_debit",
+    "identity",
+    "refunds_disputes",
+    "top_up",
+    "transfers"
+  ],
+  "new_classes": [
+    "Refund_not_showing_up",
+    "activate_my_card",
+    "apple_pay_or_google_pay",
+    "balance_not_updated_after_bank_transfer",
+    "card_acceptance",
+    "card_payment_not_recognised",
+    "disposable_card_limits",
+    "extra_charge_on_statement",
+    "getting_virtual_card",
+    "receiving_money"
+  ],
+  "feedback_examples": 50,
+  "before_accuracy": 0.3625,
+  "after_accuracy": 0.885,
+  "centered_reference_accuracy": 0.8975,
+  "feedback_leave_one_out_accuracy": 0.94,
+  "rows_before_sha256": "0c4d9955242012ce0a18b47e8bacc586f1099fc9b70459dd3a565e2f2a28856d",
+  "rows_after_sha256": "ed09b55ec5dbb24a876e664ce89d0800066fff2cba22e94e574313ef3528a228",
+  "method": "overwrite ten existing lm_head rows with raw feedback class-mean prototypes; no added parameters"
+}

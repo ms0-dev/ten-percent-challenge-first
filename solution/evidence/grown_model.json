@@ -1,0 +1,53 @@
+{
+  "model_path": "/vol/models/gguf/qwen3-k96-grown-udmix.gguf",
+  "bytes": 6402132448,
+  "sha256": "9b32863d41f8fc4f84266ae7dceb06fce80678bc1da95c2afd51cbb35e4a4feb",
+  "pre_growth_sha256": "5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e",
+  "base_bytes": 61066575656,
+  "byte_ratio": 0.10483856969587534,
+  "params": 23281219584,
+  "param_ratio": 0.7625155928628305,
+  "method": "overwrite 10 existing lm_head rows with feedback class-mean prototypes",
+  "class_tokens": {
+    "Refund_not_showing_up": {
+      "id": 15267,
+      "text": "_show"
+    },
+    "activate_my_card": {
+      "id": 16856,
+      "text": "activate"
+    },
+    "apple_pay_or_google_pay": {
+      "id": 22377,
+      "text": "apple"
+    },
+    "balance_not_updated_after_bank_transfer": {
+      "id": 21571,
+      "text": "balance"
+    },
+    "card_acceptance": {
+      "id": 35728,
+      "text": "_accept"
+    },
+    "card_payment_not_recognised": {
+      "id": 26696,
+      "text": "_payment"
+    },
+    "disposable_card_limits": {
+      "id": 31820,
+      "text": "_limits"
+    },
+    "extra_charge_on_statement": {
+      "id": 15460,
+      "text": "extra"
+    },
+    "getting_virtual_card": {
+      "id": 50110,
+      "text": "getting"
+    },
+    "receiving_money": {
+      "id": 34065,
+      "text": "_money"
+    }
+  }
+}
