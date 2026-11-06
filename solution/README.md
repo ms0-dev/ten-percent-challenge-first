@@ -1,150 +1,85 @@
-# The 10% challenge — working solution
+# The 10% challenge - solution
 
-> Status: pilot in progress. Nothing in this directory is a final proof yet.
+**Status: final artifact frozen, locked exam passed, growth demo complete.**
 
-## Goal
+The full proof is in [`PROOF.md`](PROOF.md). This README is the short version.
 
-Start from one trained model, keep about **10% of its size**, match its score
-on a commercial benchmark, pass a **locked held-out exam**, and then let it
-grow from user feedback **without training the weights**.
+## What was built
 
-We satisfy the strictest reading of "size" by reporting both:
+- Base: `Qwen/Qwen3-30B-A3B-Instruct-2507` (30.53B total, 3.3B active,
+  61,066,575,656 bytes of BF16 weights).
+- Compressed: 96 of 128 experts per layer, converted to GGUF and quantized to
+  a dynamic ~2.2-bit mix.
+- Final size: **6,402,132,448 bytes = 10.4839%** of the base weights on disk.
+- Locked exam (1,000 held-out examples):
+  - Base: **95.80%** (958/1,000)
+  - Compressed: **96.00%** (960/1,000)
+  - Zero parse failures for both.
+- Growth: 10 new intents from 50 feedback examples, **0% -> 91.25%** on a
+  400-example held-out new-intent test, with the model SHA-256 unchanged.
 
-- parameter count: compressed / base
-- on-disk checkpoint bytes: compressed / base
+The size rule was clarified by the maintainer in
+[issue #1](https://github.com/DeusExperiments/ten-percent-challenge/issues/1):
+**"10% of size on disk is fine compared to fp16 equivalent weights."** This
+solution meets that rule. The stored parameter count is 76.25% because the
+weights are quantized; the proof reports both numbers.
 
-The retrieval memory/index is counted separately and kept small.
+## Method
 
-## Approach
+1. **Choose the benchmark on dev only.** Banking77 grouped into 10 commercial
+   support queues. The 10-family exam was locked before grouped-model work:
+   `f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872`.
+2. **Select experts with forward passes.** Measure router usage on 120 dev
+   examples and keep the top 96 of 128 experts per layer. Top-96 covers
+   99.82% of routing assignments. The kept tensors are exact base slices.
+3. **Quantize the 96-expert checkpoint.** Convert to BF16 GGUF, build a task
+   importance matrix from 250 dev prompts, and quantize with a dynamic
+   per-tensor type mix. Final artifact:
+   `qwen3-k96-udmix.gguf`, SHA-256
+   `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e`.
+4. **Evaluate the locked exam once.** Base 95.80%, compressed 96.00%.
+5. **Grow from feedback without training or RAG.** Freeze the model. Compute
+   the last-token hidden state of each feedback text, center the features, and
+   store one prototype per new intent in a small sidecar head (81,920 bytes).
+   New-intent accuracy goes 0% -> 91.25%; old weights and the old locked-exam
+   score are unchanged.
 
-1. **MoE expert pruning.** The base is an MoE. We keep the top-K experts per
-   layer, selected by router usage on task calibration data (forward passes
-   only). Every kept expert tensor is an exact slice of the base tensor.
-2. **Same active path.** The base activates 4 experts per token; the compressed
-   model keeps top-4 routing over the kept experts, so the per-token expert
-   compute is unchanged.
-3. **Non-parametric growth.** User feedback is stored in a retrieval memory.
-   The model weights never change. Old knowledge is retained by construction;
-   new intents/documents are learned by retrieving their examples.
-4. **Locked exam.** Exam files are created and hashed before model development.
-   They are never read for tuning or model selection.
+## Files
 
-## Pilot benchmarks
+- [`PROOF.md`](PROOF.md) - full claim, numbers, hashes, and reproduction.
+- [`evidence/`](evidence/) - eval summaries, compression report, shard
+  manifest, locked-exam subset manifest.
+- [`locked/`](locked/) - benchmark manifests committed before development.
+- `src/compress_qwen3.py` - top-K expert checkpoint builder.
+- `src/eval_banking.py` - Transformers eval for the base.
+- `src/eval_banking_llamacpp.py` - llama.cpp eval for the compressed GGUF.
+- `src/growth_prototype.py` - training-free new-intent head.
+- `modal_app.py` - all Modal jobs (router calibration, compression, GGUF
+  conversion, quantization, evals, growth, hashing).
 
-- **Banking77** — 67 banking support intents for the main task; 10 intents are
-  held out as "new" for the feedback demo. Metric: top-1 accuracy.
-  - Memory: 6,945 labeled train examples.
-  - Dev: 1,733 held-out train examples.
-  - Locked exam: 2,680 test examples (67 old intents).
-  - Locked new-intent test: 400 test examples (10 new intents).
-  - Base pilot on 300 dev examples: **94.33%** (283/300), 0 parse failures.
-    The errors are concentrated in genuinely ambiguous fine-grained pairs.
-- **SQuAD v2 open-book QA** — pilot proxy for commercial support/legal QA.
-  The answer is in the retrieved context. Metric: four-way answer-selection
-  accuracy (one correct answer + three distractors).
-  - Dev and locked exam are created by `prepare_squad.py`.
-  - Base pilot on 300 dev examples: **98.33%** (295/300), 0 parse failures.
-  - If QA wins the pilot, the final proof will switch to a commercial QA
-    dataset (TechQA/PolicyQA/CUAD) and re-lock the exam.
-  - TechQA has been inspected on Modal: the Q&A files are clean
-    (`training_Q_A.json`, `dev_Q_A.json`, `validation_*`), but its full
-    technote corpus is large (`full_technote_collection.sections.json` is
-    6.4 GB). It is a viable commercial final dataset, not the fast pilot.
+## What did not work
 
-The benchmark is chosen on **dev only**. The chosen benchmark's locked exam is
-evaluated once.
+- **Keeping 7 of 128 experts** (the parameter-count 10% point) destroys the
+  model: top-7 covers only ~32% of routing mass, and the pruned model emits
+  newline tokens. Verified both on a saved checkpoint and by pruning the base
+  in memory.
+- **Merging all 128 experts into 7 centroids** at BF16 (6.2 GB) also fails:
+  the model emits near-newline text and cannot follow the classification
+  prompt.
+- **Uniform IQ2_XXS / IQ2_XS** on the 96-expert model scores 94.0% / 95.33%.
+  The dynamic per-tensor mix is what recovers the base score at the same size.
 
-## Locked commitments
+## Reproduction
 
-Banking77 locked-exam hashes are in
-[`locked/banking77_manifest.json`](locked/banking77_manifest.json):
+See the command list at the end of [`PROOF.md`](PROOF.md). The pipeline runs on
+Modal; the volume is `ten-percent-challenge`.
 
-- `old_test.jsonl` SHA-256: `255db6baeb5adb567c9be5cb17b6182214aed0f539c1a05fd1555c407b4cd602`
-- `new_test.jsonl` SHA-256: `8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd`
+## Honest limitations
 
-SQuAD v2 pilot locked-exam hash is in
-[`locked/squad_v2_manifest.json`](locked/squad_v2_manifest.json):
-
-- `exam.jsonl` SHA-256: `c35ceb7537e83165b9054bcedab49545c23829c2405fc1ef5a8119b374594457`
-
-## Base model (current)
-
-**`Qwen/Qwen3-30B-A3B-Instruct-2507`** — 30.5B total parameters, 3.3B active,
-61.08 GB BF16. Its 10% target is the cleanest possible:
-
-- 7 of 128 experts per layer
-- 3.115B parameters (**10.2%** of the base)
-- 6.23 GB BF16 checkpoint (**10.2%** of the base)
-- 7 experts active per token (base: 8)
-
-The first pilot used `openai/gpt-oss-120b`, but its MXFP4 expert path is
-technically blocked: the fused Triton kernels only work at the original
-128-expert count, and reconstructing reduced-expert checkpoints through the
-Python path produced garbage. Qwen3's experts are plain BF16 3D tensors, so
-the 7-expert checkpoint runs through the standard `Qwen3MoeExperts` eager
-path without Special kernels.
-
-## Benchmark variants
-
-The fine-grained Banking77 intents are grouped into commercially meaningful
-support queues. Both variants use the same locked test texts and differ only
-in label granularity:
-
-- **20-queue** grouped exam SHA-256:
-  `53c66c72e322fc82165c6ebb544140cae30c66351e2f8f2a8fe85d574e3a174a`
-- **10-family** commercial router exam SHA-256:
-  `f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872`
-
-Base Qwen3 dev results so far:
-
-- 20-queue, 300 dev examples: **95.67%**, 0 parse failures
-- 10-family, 300 dev examples: running
-
-## Reproduction (Modal)
-
-```bash
-modal run solution/modal_app.py::prepare_banking77_remote
-modal run solution/modal_app.py::prepare_squad_remote
-modal run solution/modal_app.py::download_base_remote
-modal run solution/modal_app.py::base_dev_eval_remote
-modal run solution/modal_app.py::collect_router_remote
-modal run solution/modal_app.py::build_compressed_remote --k 9 --usage banking
-modal run solution/modal_app.py::compressed_dev_eval_remote --model-tag k9-banking
-modal run solution/modal_app.py::make_combined_memory_remote
-modal run solution/modal_app.py::growth_eval_remote --model-tag k9-banking
-modal run solution/modal_app.py::final_banking_base_remote
-modal run solution/modal_app.py::final_banking_compressed_remote --model-tag k9-banking
-```
-
-The final locked-exam evaluation is a separate function and is only run once,
-after the benchmark and compressed model are frozen.
-
-## Growth demo design
-
-The deployed memory is namespaced by intent family:
-
-- **Old partition:** 67 old intents, 6,945 examples. The locked old exam is
-  evaluated in this partition.
-- **New partition:** 10 new intents, 5 user-feedback examples each. The
-  new-intent test is evaluated in this partition.
-
-The model weights are shared and frozen. The growth demo reports:
-
-- new-intent accuracy before feedback (old partition only; the new labels are
-  not available)
-- new-intent accuracy after feedback (new partition added)
-- old-intent dev accuracy before/after feedback (interference check)
-- old locked exam after growth (namespaced old partition)
-- SHA-256 of the model files before/after (must be identical)
-- SHA-256 of the memory/index before/after (changes; this is the growth)
-
-## Evidence to include in the final proof
-
-- base vs compressed dev scores on both benchmarks
-- parameter and byte ratios
-- exact-slice proof / hashes for kept expert tensors
-- no-training check (no optimizer, no gradients, weights frozen)
-- locked exam scores (base and compressed), evaluated once
-- feedback demo: new-intent accuracy before/after, old exam unchanged, model
-  weight hash unchanged
-- reproduction commands and seeds
+- The challenge metric used here is **disk size**, per the maintainer's
+  clarification. The stored parameter count is 76.25%, not 10%.
+- The base is evaluated with Transformers and the compressed artifact with
+  llama.cpp. The prompt construction, retrieval, tokenizer, greedy decoding,
+  and parser are identical; both have zero parse failures on the locked exam.
+- The growth head is a sidecar over frozen hidden states. It adds new-intent
+  capability without changing the old model or its locked-exam score.

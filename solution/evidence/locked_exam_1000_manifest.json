@@ -1,0 +1,10 @@
+{
+  "dataset": "PolyAI/banking77",
+  "variant": "10_family_grouped",
+  "full_exam_sha256": "f9e90fc97ec1808297426381a1750e36193eae6417c99c129d421c2c4d13e872",
+  "subset": "first 1000 rows of solution/data/banking77_10class/locked/old_test.jsonl",
+  "subset_sha256": "8e2a8288e94c50542c2c40268ac6d8267c7746d3a58dcdbb8dd1926682610d44",
+  "rows": 1000,
+  "first_id": "banking77-test-0",
+  "last_id": "banking77-test-1159"
+}

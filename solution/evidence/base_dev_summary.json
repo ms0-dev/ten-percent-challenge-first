@@ -1,0 +1,17 @@
+{
+  "accuracy": 0.9733333333333334,
+  "benchmark": "banking77",
+  "candidate_k": 0,
+  "candidate_pool": 30,
+  "candidate_recall": 1.0,
+  "correct": 292,
+  "created_at": "2026-11-06T07:30:36.834250+00:00",
+  "final_eval": false,
+  "model": "base-qwen3-10",
+  "model_path": "/vol/models/qwen3-30b",
+  "n": 300,
+  "parse_failure_rate": 0.0,
+  "parse_failures": 0,
+  "split": "dev",
+  "top_k": 8
+}

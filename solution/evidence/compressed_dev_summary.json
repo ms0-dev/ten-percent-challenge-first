@@ -1,0 +1,18 @@
+{
+  "accuracy": 0.98,
+  "benchmark": "banking77",
+  "candidate_k": 0,
+  "candidate_pool": 30,
+  "candidate_recall": 1.0,
+  "correct": 294,
+  "created_at": "2026-11-06T11:06:24.592926+00:00",
+  "elapsed_seconds": 44.60955214500427,
+  "final_eval": false,
+  "model": "qwen3-k96-udmix",
+  "model_path": "/vol/models/gguf/qwen3-k96-udmix.gguf",
+  "n": 300,
+  "parse_failure_rate": 0.0,
+  "parse_failures": 0,
+  "split": "dev",
+  "top_k": 8
+}

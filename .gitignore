@@ -6,3 +6,6 @@ solution/data/
 solution/models/
 solution/results/*
 !solution/results/.gitkeep
+
+solution/.hf/
+solution/.llama-src/
