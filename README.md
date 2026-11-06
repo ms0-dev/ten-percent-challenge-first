@@ -1,5 +1,9 @@
 # The 10% challenge
 
+> **Solution in this fork:** [`solution/PROOF.md`](solution/PROOF.md) - 10.48%
+> of Qwen3-30B on disk, locked exam 96.00% vs base 95.80%, training-free
+> growth. Summary: [`solution/README.md`](solution/README.md).
+
 ![The 10% challenge](challenge.png)
 
 Small, just as good, and still learning.
