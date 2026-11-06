@@ -16,7 +16,8 @@ The full proof is in [`PROOF.md`](PROOF.md). This README is the short version.
   - Compressed: **96.00%** (960/1,000)
   - Zero parse failures for both.
 - Growth: 10 new intents from 50 feedback examples, **0% -> 91.25%** on a
-  400-example held-out new-intent test, with the model SHA-256 unchanged.
+  400-example held-out new-intent test, with the model SHA-256 unchanged. The
+  locked exam was re-run after growth: **96.00%** again.
 
 The size rule was clarified by the maintainer in
 [issue #1](https://github.com/DeusExperiments/ten-percent-challenge/issues/1):

@@ -803,6 +803,79 @@ def growth_prototype_remote(
     cpu=8,
     memory=32768,
 )
+def prompt_audit_remote(
+    gguf: str = "/vol/models/gguf/qwen3-k96-udmix.gguf",
+) -> None:
+    import statistics
+    import urllib.request
+
+    from transformers import AutoTokenizer
+
+    sys.path.insert(0, "/src")
+    from common import read_jsonl
+    from eval_banking_llamacpp import label_description, render_prompt
+    from prompts import build_banking_messages
+    from retrieval import BM25Index
+
+    data = Path("/vol/data/banking77_10class")
+    meta = json.loads((data / "meta.json").read_text(encoding="utf-8"))
+    memory = list(read_jsonl(data / "old_memory.jsonl"))
+    rows = list(read_jsonl(data / "locked" / "old_test.jsonl"))[:1000]
+    labels = [{"label_name": n, "label_desc": label_description(n)} for n in meta["old_intents"]]
+    index = BM25Index([x["text"] for x in memory])
+    tokenizer = AutoTokenizer.from_pretrained("/vol/models/qwen3-30b", trust_remote_code=True)
+
+    prompts = []
+    for row in rows:
+        hits = index.search(row["text"], k=8)
+        examples = [memory[h.index] for h in hits[:8]]
+        prompts.append(render_prompt(tokenizer, build_banking_messages(row["text"], examples, labels)))
+    lengths = [len(tokenizer(p)["input_ids"]) for p in prompts]
+    print("PROMPT LENGTHS max", max(lengths), "median", statistics.median(lengths), "p99", sorted(lengths)[989], "over3072", sum(x > 3072 for x in lengths), flush=True)
+
+    server_bin, env = _llamacpp_server()
+    log_path = Path("/tmp/llama-tokenize.log")
+    log = log_path.open("w")
+    proc = subprocess.Popen(
+        [
+            str(server_bin), "-m", gguf,
+            "--host", "127.0.0.1", "--port", "8080",
+            "-ngl", "99", "-c", "2048", "-t", "8",
+        ],
+        env=env,
+        stdout=log,
+        stderr=subprocess.STDOUT,
+    )
+    try:
+        _wait_for_server(8080, proc, log_path)
+        payload = json.dumps({"content": prompts[0]}).encode()
+        req = urllib.request.Request(
+            "http://127.0.0.1:8080/tokenize",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            result = json.loads(resp.read())
+        hf_ids = tokenizer(prompts[0])["input_ids"]
+        gguf_ids = result["tokens"]
+        print("HF", len(hf_ids), hf_ids[:20], flush=True)
+        print("GGUF", len(gguf_ids), gguf_ids[:20], flush=True)
+        print("EQUAL", hf_ids == gguf_ids, flush=True)
+    finally:
+        proc.terminate()
+        proc.wait(timeout=60)
+        log.close()
+        print("SERVER LOG TAIL", log_path.read_text(errors="replace")[-1500:], flush=True)
+
+
+@app.function(
+    image=llamacpp_image,
+    volumes={"/vol": volume},
+    gpu="A10",
+    timeout=3600,
+    cpu=8,
+    memory=32768,
+)
 def llamacpp_embedding_remote(
     gguf: str = "/vol/models/gguf/qwen3-k96-udmix.gguf",
     text: str = "My card was charged twice for the same purchase.",

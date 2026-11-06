@@ -101,12 +101,33 @@ statistics, and quantize.
 |---|---:|---:|---:|
 | Base Qwen3-30B (BF16) | 95.80% | 958 / 1,000 | 0 |
 | Compressed 6.40 GB GGUF | **96.00%** | **960 / 1,000** | 0 |
+| Compressed, re-run after growth | **96.00%** | **960 / 1,000** | 0 |
 
 The compressed model is **0.20 points above** the base (2 examples), well
 inside sampling noise. Both models produce a valid label on every example.
+The exam was re-run after the growth step on the byte-identical frozen model
+and produced the same score.
 
-Evidence: `evidence/base_exam_summary.json` and
-`evidence/compressed_exam_summary.json`.
+Evidence: `evidence/base_exam_summary.json`,
+`evidence/compressed_exam_summary.json`, and
+`evidence/compressed_exam_after_growth_summary.json`.
+
+### Protocol audit
+
+- **Same examples.** Both models read the first 1,000 rows of the pre-locked
+  exam, same order, same labels.
+- **Same tokenizer.** A prompt rendered with the HF tokenizer and tokenized by
+  llama.cpp produced identical IDs: 281/281 tokens, same first 20 IDs.
+- **No truncation.** Over the 1,000 exam prompts: max 681 tokens, median 295,
+  p99 521, zero prompts over 3,072. The base's 3,072 limit and the compressed
+  model's 8,192 context both see the full prompt.
+- **Same retrieval and prompt.** BM25 top-8 over the same 6,945-example
+  training memory, same label descriptions, same parser, greedy decoding.
+  The BM25 memory is benchmark data, identical for both models, and is not
+  part of either model's size.
+- **No exam leakage.** The compressed artifact and the quant recipe were
+  frozen before the exam was read. The exam was read once per model; the
+  post-growth re-run uses the same frozen file.
 
 ## Growth with user feedback
 
@@ -136,8 +157,9 @@ optimizer are used.
   `5266a9f6edbba6426b0abd313f5d213fe93244947e9e8d690bfc8ad6d965db2e`.
 
 "Keeps the old" is shown by the unchanged model file and the unchanged locked
-exam score (96.00%). The new head only serves the ten new intents; the old
-10-family generative router is byte-identical before and after growth.
+exam score (96.00% before and after growth). The new head only serves the ten
+new intents; the old 10-family generative router is byte-identical before and
+after growth.
 
 Evidence: `evidence/growth_summary.json`.
 
@@ -218,3 +240,7 @@ modal run solution/modal_app.py::growth_prototype_remote
 - The growth head is a sidecar over frozen hidden states. It does not modify
   the old generative router; the old locked-exam score is unchanged because
   the model file is unchanged.
+- The new-intent growth test is separate from the official locked exam. A few
+  training-free heads were compared on it during development; the official
+  exam was never used for selection. The final head was chosen for simplicity
+  and leave-one-out performance.
