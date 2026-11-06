@@ -1,0 +1,8 @@
+{
+  "dataset": "rajpurkar/squad_v2",
+  "created_at": "2026-11-06T05:04:00Z",
+  "note": "Locked before model development; do not read until final evaluation. The exam file is not in git; only its SHA-256 hash is committed.",
+  "sha256": {
+    "exam.jsonl": "c35ceb7537e83165b9054bcedab49545c23829c2405fc1ef5a8119b374594457"
+  }
+}

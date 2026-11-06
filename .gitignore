@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.cache/
+solution/data/
+solution/models/
+solution/results/*
+!solution/results/.gitkeep

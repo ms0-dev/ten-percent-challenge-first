@@ -1,0 +1,9 @@
+{
+  "dataset": "PolyAI/banking77",
+  "created_at": "2026-11-06T04:51:20.785482+00:00",
+  "note": "Locked before model development; do not read until final evaluation. The exam files are not in git; only their SHA-256 hashes are committed.",
+  "sha256": {
+    "new_test.jsonl": "8107c48c90c5aa75f5cd9978a0bf10f3c493524fecc330016fd94793e4bda3dd",
+    "old_test.jsonl": "255db6baeb5adb567c9be5cb17b6182214aed0f539c1a05fd1555c407b4cd602"
+  }
+}
